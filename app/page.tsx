@@ -1,6 +1,4 @@
-// src/app/page.tsx
-
-"use client";  // Adicione esta linha no topo
+"use client";
 import About from "@/Components/About";
 import Footer from "@/Components/Footer";
 import Hero from "@/Components/Hero";
@@ -10,16 +8,17 @@ import Projects from "@/Components/Projects";
 import Services from "@/Components/Services";
 import Skills from "@/Components/Skills";
 import React, { useEffect, useState } from "react";
-import 'aos/dist/aos.css';  // Importar o CSS do AOS
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HomePage = () => {
   const [nav, setNav] = useState(false);
   const openNav = () => setNav(true);
   const closeNav = () => setNav(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const AOS = require('aos');  // Importa AOS dinamicamente apenas no cliente
+    setMounted(true);
     AOS.init({
       disable: false,
       startEvent: 'DOMContentLoaded',
@@ -39,13 +38,15 @@ const HomePage = () => {
     });
   }, []);
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="overflow-x-hidden">
       <div>
-        {/* NavBar */}
         <MobileNav nav={nav} closeNav={closeNav} />
         <Nav openNav={openNav} />
-        {/* Hero section */}
         <Hero />
         <div className="relative z-[30]">
           <About />
