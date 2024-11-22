@@ -1,7 +1,6 @@
 // src/app/page.tsx
 
 "use client";  // Adicione esta linha no topo
-
 import About from "@/Components/About";
 import Footer from "@/Components/Footer";
 import Hero from "@/Components/Hero";
@@ -11,16 +10,16 @@ import Projects from "@/Components/Projects";
 import Services from "@/Components/Services";
 import Skills from "@/Components/Skills";
 import React, { useEffect, useState } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
+import 'aos/dist/aos.css';  // Importar o CSS do AOS
+
 
 const HomePage = () => {
   const [nav, setNav] = useState(false);
   const openNav = () => setNav(true);
   const closeNav = () => setNav(false);
 
-  // Animação
   useEffect(() => {
+    const AOS = require('aos');  // Importa AOS dinamicamente apenas no cliente
     AOS.init({
       disable: false,
       startEvent: 'DOMContentLoaded',
