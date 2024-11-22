@@ -6,11 +6,7 @@ interface MobileNavProps {
     closeNav: () => void;
 }
 
-export default function Page() {
-    // Dummy props for demonstration
-    const nav = false;
-    const closeNav = () => {};
-
+const MobileNav: React.FC<MobileNavProps> = ({ nav, closeNav }) => {
     return (
         <div className={`fixed ${nav ? "translate-x-0" : "translate-x-[-100%]"} transform transition-all duration-300 top-0 left-0 right-0 bottom-0 z-[1000000] bg-[#09101a]`}>
             <div className="w-[100vw] h-[100vh] flex flex-col items-center justify-center">
@@ -30,3 +26,5 @@ export default function Page() {
         </div>
     )
 }
+
+export default MobileNav;
