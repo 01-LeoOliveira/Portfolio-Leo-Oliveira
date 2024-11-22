@@ -3,7 +3,7 @@ import About from "@/app/About/page";
 import Footer from "@/app/Footer/page";
 import Hero from "@/app/Hero/page";
 import MobileNav from "@/Components/MobileNav";
-import Nav from "@/app/Nav/page";
+import Nav from "@/Components/Nav";
 import Projects from "@/app/Projects/page";
 import Services from "@/app/Services/page";
 import Skills from "@/app/Skills/page";
