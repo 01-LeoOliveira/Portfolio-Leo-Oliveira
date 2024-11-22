@@ -1,6 +1,6 @@
 import React from "react";
-import Skillsitem from "./Skillsitem";
-import SkillsLanguage from "./SkillsLanguage";
+import Skillsitem from "../Skillsistem/page";
+import SkillsLanguage from "../SkillLangueage/page";
 
 const Skills = () => {
     return (
