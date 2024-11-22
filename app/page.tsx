@@ -13,40 +13,59 @@ import 'aos/dist/aos.css';
 
 const HomePage = () => {
   const [nav, setNav] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const openNav = () => setNav(true);
   const closeNav = () => setNav(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    AOS.init({
-      disable: false,
-      startEvent: 'DOMContentLoaded',
-      initClassName: 'aos-init',
-      animatedClassName: 'aos-animate',
-      useClassNames: false,
-      disableMutationObserver: false,
-      debounceDelay: 50,
-      throttleDelay: 99,
-      offset: 120,
-      delay: 0,
-      duration: 1000,
-      easing: 'ease',
-      once: true,
-      mirror: false,
-      anchorPlacement: 'top-bottom',
-    });
+    try {
+      // Inicializa AOS apenas após a montagem do componente
+      if (typeof window !== 'undefined') {
+        AOS.init({
+          disable: false,
+          startEvent: 'DOMContentLoaded',
+          duration: 1000,
+          once: true,
+        });
+      }
+    } catch (err) {
+      console.error('Erro ao inicializar AOS:', err);
+      setError('Erro ao carregar animações');
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
-  if (!mounted) {
-    return null;
+  // Componente de fallback para erros
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#121121]">
+        <div className="text-white text-center">
+          <h1 className="text-2xl mb-4">Ops! Algo deu errado</h1>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#121121]">
+        <div className="text-white">Carregando...</div>
+      </div>
+    );
   }
 
   return (
     <div className="overflow-x-hidden">
       <div>
+        {/* NavBar */}
         <MobileNav nav={nav} closeNav={closeNav} />
         <Nav openNav={openNav} />
+        {/* Hero section */}
         <Hero />
         <div className="relative z-[30]">
           <About />
